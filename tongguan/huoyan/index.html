@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1a0f08">
+  <title>火眼金睛 · 通关达人</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./game.css">
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div id="app" class="app">
+    <section id="screen-title" class="screen">
+      <p class="kicker">通关达人 · 观察专项</p>
+      <h1 class="logo">火眼金睛</h1>
+      <p class="tag">两幅西游图，找出不一样的地方。<br>点中就圈住——没有倒计时逼你。</p>
+      <div class="hero-eyes" aria-hidden="true">
+        <span class="eye"></span><span class="eye"></span>
+      </div>
+      <button type="button" class="btn primary xl" id="btn-start">开眼</button>
+      <p class="best" id="bestline">最高连击 — · 最远关 —</p>
+    </section>
+
+    <section id="screen-play" class="screen" hidden>
+      <header class="hud">
+        <button type="button" class="icon-btn" id="btn-quit" aria-label="退出">←</button>
+        <div class="hud-mid">
+          <span class="pill" id="level-pill">第 1 眼</span>
+          <div class="stars" id="stars" aria-label="心神">
+            <i></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="hud-right">
+          <span class="combo" id="combo" hidden>连击 <b>0</b></span>
+          <span class="score" id="score">0</span>
+        </div>
+      </header>
+
+      <p class="prompt" id="prompt">找出所有不同</p>
+      <div class="boards" id="boards">
+        <div class="board" data-side="a">
+          <div class="board-label">左景</div>
+          <div class="stage" id="stage-a"></div>
+        </div>
+        <div class="board" data-side="b">
+          <div class="board-label">右景</div>
+          <div class="stage" id="stage-b"></div>
+        </div>
+      </div>
+
+      <div class="meter">
+        <span id="found">已找 0 / 0</span>
+        <button type="button" class="btn ghost sm" id="btn-hint" hidden>闪闪提示</button>
+      </div>
+      <div id="fx" class="fx" aria-hidden="true"></div>
+    </section>
+
+    <section id="screen-result" class="screen" hidden>
+      <div class="panel">
+        <p class="kicker" id="res-kicker">本眼结算</p>
+        <h2 id="res-title">火眼初开</h2>
+        <p class="diff-list" id="res-diffs"></p>
+        <div class="stats" id="res-stats"></div>
+        <div class="row">
+          <button type="button" class="btn primary xl" id="btn-next">下一眼</button>
+          <button type="button" class="btn ghost" id="btn-home">回标题</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="./game.js"></script>
+</body>
+</html>
