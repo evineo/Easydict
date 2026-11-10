@@ -1,0 +1,16 @@
+name = "tongguan-fazhe"
+compatibility_date = "2026-11-10"
+workers_dev = true
+
+# 发布到 aikid 公网：由 CI / bot 执行 `wrangler deploy`
+# 自定义域（二选一，按你在 Cloudflare 里已有的 Zone 调整）：
+#   fazhe.aikid.cc.cd  → 本 Worker
+#   或 tongguan.aikid.cc.cd/fazhe/* 需在现有 tongguan Worker 里挂路径
+
+[[routes]]
+pattern = "fazhe.aikid.cc.cd/*"
+zone_name = "aikid.cc.cd"
+
+[assets]
+directory = "."
+not_found_handling = "single-page-application"
