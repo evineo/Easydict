@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#07140f">
+  <title>法则沙盘 · 通关达人</title>
+  <meta name="description" content="通关达人逻辑专项：从例子里发现法则，决定谁能进金光阵。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./game.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+
+  <div id="app" class="app">
+    <!-- TITLE -->
+    <section id="screen-title" class="screen screen-title" data-screen="title">
+      <p class="kicker">通关达人 · 逻辑专项</p>
+      <h1 class="logo">法则沙盘</h1>
+      <p class="tagline">看例子，找法则。<br>只有符合法则的符，才能进金光阵。</p>
+      <div class="title-ring" aria-hidden="true">
+        <div class="ring-core"></div>
+        <div class="orbit o1"></div>
+        <div class="orbit o2"></div>
+      </div>
+      <div class="title-actions">
+        <button type="button" class="btn primary xl" id="btn-start">开始试炼</button>
+        <button type="button" class="btn ghost" id="btn-howto">怎么玩</button>
+      </div>
+      <p class="bestline" id="bestline">最高连击 — · 最佳得分 —</p>
+    </section>
+
+    <!-- HOW TO -->
+    <section id="screen-how" class="screen" data-screen="how" hidden>
+      <div class="panel">
+        <p class="eyebrow">怎么玩</p>
+        <h2>三步通关</h2>
+        <ol class="how-list">
+          <li><b>看例子</b>：哪些符进了阵，哪些被拦下。</li>
+          <li><b>找法则</b>：颜色、印形、点数里藏着同一条规则。</li>
+          <li><b>做判定</b>：新符来了，点「进阵」或「拦下」。</li>
+        </ol>
+        <p class="hint">判定越准、连击越高，分数越高。法则由程序生成，不靠猜题库。</p>
+        <div class="row">
+          <button type="button" class="btn primary" id="btn-how-go">明白了，开始</button>
+          <button type="button" class="btn ghost" id="btn-how-back">返回</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDY -->
+    <section id="screen-study" class="screen" data-screen="study" hidden>
+      <header class="hud">
+        <button type="button" class="icon-btn" id="btn-study-quit" aria-label="退出">←</button>
+        <div class="hud-mid">
+          <span class="pill" id="round-pill">第 1 阵</span>
+          <span class="pill soft" id="diff-pill">入门</span>
+        </div>
+        <div class="hud-score"><span id="live-score">0</span></div>
+      </header>
+      <div class="stage">
+        <div class="coach">
+          <div class="coach-face" aria-hidden="true">阵</div>
+          <p class="coach-say" id="study-say">先看这些例子。进了阵的，都守着同一条法则。</p>
+        </div>
+        <div class="array" id="study-array" aria-label="例子"></div>
+        <div class="legend">
+          <span class="leg ok">进阵</span>
+          <span class="leg no">拦下</span>
+        </div>
+        <button type="button" class="btn primary xl wide" id="btn-ready">我看出点门道了</button>
+      </div>
+    </section>
+
+    <!-- JUDGE -->
+    <section id="screen-judge" class="screen" data-screen="judge" hidden>
+      <header class="hud">
+        <button type="button" class="icon-btn" id="btn-judge-quit" aria-label="退出">←</button>
+        <div class="hud-mid">
+          <div class="combo" id="combo" hidden>连击 <b id="combo-n">0</b></div>
+          <div class="progress" aria-hidden="true"><i id="progress-fill"></i></div>
+        </div>
+        <div class="hud-score"><span id="live-score-2">0</span></div>
+      </header>
+      <div class="stage judge-stage">
+        <p class="judge-prompt" id="judge-prompt">这条符，进不进阵？</p>
+        <div class="arena">
+          <div class="formation" aria-hidden="true">
+            <div class="formation-ring"></div>
+            <div class="formation-glow"></div>
+          </div>
+          <div id="judge-card-slot" class="card-slot"></div>
+        </div>
+        <div class="meter">
+          <span id="judge-count">1 / 8</span>
+          <span id="judge-acc">正确 0</span>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn danger xl" id="btn-block">拦下</button>
+          <button type="button" class="btn go xl" id="btn-enter">进阵</button>
+        </div>
+      </div>
+      <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+    </section>
+
+    <!-- RESULT -->
+    <section id="screen-result" class="screen" data-screen="result" hidden>
+      <div class="panel result-panel">
+        <p class="eyebrow" id="result-eyebrow">本阵结算</p>
+        <h2 id="result-title">阵法识破</h2>
+        <p class="rule-reveal" id="rule-reveal"></p>
+        <div class="stats" id="result-stats"></div>
+        <div class="row">
+          <button type="button" class="btn primary xl" id="btn-next">下一阵</button>
+          <button type="button" class="btn ghost" id="btn-home">回标题</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./game.js"></script>
+</body>
+</html>
