@@ -1,0 +1,28 @@
+name: Deploy 法则沙盘 to aikid
+
+on:
+  push:
+    branches:
+      - cursor/fazhe-shapan-1b21
+      - main
+    paths:
+      - "tongguan/fazhe/**"
+      - ".github/workflows/deploy-fazhe.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: tongguan/fazhe
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: tongguan/fazhe
+          command: deploy
